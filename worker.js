@@ -19,7 +19,9 @@ export default {
   fetch: async (req, env) => {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
     if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
-    const [ name, args ] = pathSegments
+    const [ name, rawArgs ] = pathSegments
+    const argArray = rawArgs.split(',')
+    const args = argArray.map(arg => ({ name: arg.split('=')[0], default: arg.split('=')[0] }))
     const isCode = decodeURI(pathSegments[2]).includes('=>')
     const code = decodeURI(pathSegments[2])
     const importUrl = `import func from '${url}'`
@@ -33,7 +35,7 @@ export const api = {
   url: 'https://${name}.worker.do/api',
   type: 'https://${name}.apis.do/code',
   endpoints: {
-    ${name}: 'https://${name}.worker.do/${args}',
+    ${name}: 'https://${name}.worker.do/${args.map(arg => ':' + arg.name).join('/')}',
   },
   site: 'https://${name}.worker.do',
   login: 'https://${name}.worker.do/login',
@@ -45,9 +47,9 @@ export const api = {
 export default {
   fetch: async (req, ctx) => {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await ctx.fetch(req).then(res => res.json())
-    const [args] = pathSegments
+    const [${args.map(arg => arg.name + ' = ' + arg.default).join(', ')}] = pathSegments
     const func = (${args}) => ${code}
-    const results = await func([...args],query)
+    const results = await func(${args.map(arg => arg.name).join(', ')},query)
     return new Response(JSON.stringify({api,args,query,results,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
   }
 }
