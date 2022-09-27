@@ -23,7 +23,7 @@ export default {
     const code = pathSegments[0]
     const importUrl = `import func from '${url}'`
     const template = importUrl + `
-import ctx from 'https://pkg.do/ctx.do'
+import ctx from 'https://pkg.do/ctx.do@1.0.6'
 
 export const api = {
   icon: '👌',
