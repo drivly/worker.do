@@ -1,1 +1,8 @@
-wrangler.toml
+name = "worker-do"
+route = { pattern = "*/*", zone_name = "worker.do" }
+main = "worker.js"
+compatibility_date = "2022-08-25"
+
+services = [
+  { binding = "CTX", service = "ctx-do", environment = "production" }
+]
