@@ -44,7 +44,7 @@ export const api = {
 
 export default {
   fetch: async (req, ctx) => {
-    const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
+    const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await ctx.fetch(req).then(res => res.json())
     const [args] = pathSegments
     const func = ${code}
     const results = await func([...args],query)
