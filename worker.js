@@ -19,7 +19,7 @@ export default {
   fetch: async (req, env) => {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
     if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
-    const [ name, args ] = pathSegments[2])
+    const [ name, args ] = pathSegments
     const isCode = decodeURI(pathSegments[2]).includes('=>')
     const code = decodeURI(pathSegments[2])
     const importUrl = `import func from '${url}'`
@@ -46,7 +46,7 @@ export default {
   fetch: async (req, ctx) => {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await ctx.fetch(req).then(res => res.json())
     const [args] = pathSegments
-    const func = ${code}
+    const func = (${args}) => ${code}
     const results = await func([...args],query)
     return new Response(JSON.stringify({api,args,query,results,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
   }
