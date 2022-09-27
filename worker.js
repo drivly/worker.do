@@ -21,7 +21,7 @@ export default {
     if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
     const isCode = pathSegments[0].includes('=>')
     const code = pathSegments[0]
-    const importUrl = `import func from '${url}'\n\n`
+    const importUrl = `import func from '${url}'`
     const template = importUrl + `
 import ctx from 'https://pkg.do/ctx.do'
 
