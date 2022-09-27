@@ -20,7 +20,7 @@ export default {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
     if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
     const isCode = pathSegments[0].includes('=>')
-    const code = pathSegments[0]
+    const code = decodeURI(pathSegments[0])
     const importUrl = `import func from '${url}'\n\n`
     const template = importUrl + `
 import ctx from 'https://pkg.do/ctx.do'
