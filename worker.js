@@ -21,7 +21,7 @@ export default {
     if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
     const [ name, rawArgs ] = pathSegments
     const argArray = rawArgs.split(',')
-    const args = argArray.map(arg => ({ name: arg.split('=')[0], default: arg.split('=')[0] }))
+    const args = argArray.map(arg => ({ name: arg.split('=')[0], default: arg.split('=')[1] }))
     const isCode = decodeURI(pathSegments[2]).includes('=>')
     const code = decodeURI(pathSegments[2])
     const importUrl = `// Generated at ${url}\n${isCode ? `import func from '${url}'` : ''}`
