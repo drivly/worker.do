@@ -15,6 +15,10 @@ export const api = {
   repo: 'https://github.com/drivly/worker.do',
 }
 
+const examples = {
+  fromGist = 'https://worker.do/math/number=5/gist.githubusercontent.com/nathanclevenger/05c566c2452de53caa20a32cd12fbbca/raw/203017cdae58f14d72a242627a1e10e986444a2f/index.js'
+}
+
 export default {
   fetch: async (req, env) => {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
