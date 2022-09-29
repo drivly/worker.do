@@ -52,9 +52,9 @@ export default {
   fetch: async (req, ctx) => {
     // const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await ctx.fetch(req).then(res => res.json())
     const { hostname, pathname, searchParams } = new URL(req.url)
-    const [${args.map(arg => arg.name + ' = ' + arg.default).join(', ')}] = pathname.split('/')
-    const func = (${args.join(', ')}) => ${code}
-    const results = await func(${args.map(arg => arg.name).join(', ')},query)
+    const [...args] = pathname.split('/')
+    const func = (${args.map(arg => arg.name + ' = ' + arg.default).join(', ')}) => ${code}
+    const results = await func([...args])
     return new Response(JSON.stringify({api,args,query,results,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
   }
 }
