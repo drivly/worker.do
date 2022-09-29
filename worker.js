@@ -55,7 +55,7 @@ export default {
     const [...args] = pathname.split('/')
     const func = (${args.map(arg => arg.name + ' = ' + arg.default).join(', ')}) => ${code}
     const results = await func([...args])
-    return new Response(JSON.stringify({api,args,results}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
+    return new Response(JSON.stringify({ api, args, results }, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
   }
 }
 `
