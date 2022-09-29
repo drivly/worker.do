@@ -25,9 +25,8 @@ export default {
     const isCode = decodeURI(pathSegments[2]).includes('=>')
     const code = decodeURI(pathSegments[2])
     const importUrl = `// Generated at ${url}\n${isCode ? `import func from '${url}'` : ''}`
-    const template = importUrl + `
 // import ctx from 'https://pkg.do/ctx.do@1.0.6'
-
+    const template = importUrl + `
 export const api = {
   icon: '👌',
   name: 'worker.do',
